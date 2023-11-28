@@ -1,19 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
   const searchInput = document.getElementById("search-input");
   const mealList = document.getElementById("meals-div");
-  const favoritesList = document.getElementById("my-favorite-meals"); // Corrected id from my-favourite-meals to my-favorite-meals
+  const favoritesList = document.getElementById("my-favorite-meals");
 
-  let favoriteArray = [];
-  let URL;
-
-  if (!localStorage.getItem("favoriteArray")) {
-    localStorage.setItem("favoriteArray", JSON.stringify(favoriteArray));
-  } else {
-    favoriteArray = JSON.parse(localStorage.getItem("favoriteArray"));
-  }
+  let favoriteArray = getFavoriteArray();
 
   async function moreDetails() {
-    let id = this.id;
+    const id = this.id;
     const response = await fetch(
       `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
     );
@@ -21,7 +14,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     mealList.innerHTML = "";
 
-    let meals = data.meals[0];
+    const meals = data.meals[0];
+
+    // Add "Back" button outside the div
+    const backButton = document.createElement("button");
+    backButton.classList.add("back-button");
+    backButton.textContent = "Back";
+    mealList.append(backButton);
 
     const div = document.createElement("div");
     div.classList.add("details-page");
@@ -30,12 +29,11 @@ document.addEventListener("DOMContentLoaded", function () {
         <img src="${meals.strMealThumb}" alt="">
         <p>${meals.strInstructions}</p>
         <h5>Cuisine Type: ${meals.strArea}</h5>
-        <a href="${meals.strYoutube}"><button type="button"  id='${meals.idMeal}'>Watch Video</button></a>`;
+        <a href="${meals.strYoutube}"><button type="button" id='${meals.idMeal}'>Watch Video</button></a>`;
 
     mealList.append(div);
 
     // Add event listener for the back button
-    const backButton = div.querySelector(".back-button");
     backButton.addEventListener("click", function () {
       displaySearchResults(searchInput.value);
     });
@@ -43,8 +41,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function toggleFavorites(event) {
     event.preventDefault();
-    let index = favoriteArray.indexOf(this.id);
-    if (index == -1) {
+    const index = favoriteArray.indexOf(this.id);
+    if (index === -1) {
       favoriteArray.push(this.id);
       this.classList.add("clicked");
     } else {
@@ -52,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
       this.classList.remove("clicked");
     }
 
-    localStorage.setItem("favoriteArray", JSON.stringify(favoriteArray));
+    updateLocalStorage();
   }
 
   async function createMeals(query) {
@@ -64,33 +62,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
       mealList.innerHTML = "";
       if (data.meals) {
-        for (let meals of data.meals) {
+        for (const meals of data.meals) {
           const div = document.createElement("div");
           div.classList.add("images");
           div.innerHTML = `
                     <img src="${meals.strMealThumb}" alt="">
                     <h4>${meals.strMeal}</h4>
+                    <div class='button-inside'>
                     <button type="button" class='more-details' id='${
                       meals.idMeal
-                    }'>view Details</button>
+                    }'>View Details</button>
                     ${
                       favoriteArray.includes(meals.idMeal)
                         ? `<a href="" class='favourite clicked' id='${meals.idMeal}'><i class="fa-sharp fa-solid fa-heart"></i></a>`
-                        : `<a href="" class='favourite' id='${meals.idMeal}'><i class="fa-sharp fa-solid fa-heart"></i></a>`
+                        : `<a href="" class='favourite' id='${meals.idMeal}'><i class="fa-sharp fa-solid fa-heart"></i></a> 
+                        </div>`
                     }`;
 
           mealList.append(div);
         }
 
-        var favoriteButton = document.querySelectorAll("a");
-        for (let button of favoriteButton) {
-          button.addEventListener("click", toggleFavorites);
-        }
-
-        var moreDetailsbutton = document.querySelectorAll(".more-details");
-        for (let button of moreDetailsbutton) {
-          button.addEventListener("click", moreDetails);
-        }
+        addEventListeners();
       } else {
         mealList.innerHTML = "No results found.";
       }
@@ -99,45 +91,52 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  function addEventListeners() {
+    const favoriteButton = document.querySelectorAll("a");
+    for (const button of favoriteButton) {
+      button.addEventListener("click", toggleFavorites);
+    }
+
+    const moreDetailsbutton = document.querySelectorAll(".more-details");
+    for (const button of moreDetailsbutton) {
+      button.addEventListener("click", moreDetails);
+    }
+  }
+
   // Call the searchMeals function initially with an empty query to display all meals
-  displaySearchResults(""); // Corrected event listener for displaySearchResults
-  function displaySearchResults() {
-    let query = searchInput.value;
+  displaySearchResults("");
+
+  function displaySearchResults(query) {
     createMeals(query);
   }
 
   async function displayFavoriteMeals() {
     mealList.innerHTML = "";
 
-    for (let meal of favoriteArray) {
+    for (const meal of favoriteArray) {
       const response = await fetch(
         `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal}`
       );
       const data = await response.json();
 
-      let meals = data.meals[0];
+      const meals = data.meals[0];
 
       const div = document.createElement("div");
       div.classList.add("images");
       div.innerHTML = `
               <img src="${meals.strMealThumb}" alt="">
               <h4>${meals.strMeal}</h4>
-              <button type="button" class='border-circle more-details' id='${meals.idMeal}'>More Details</button>
-              <a href="" class='favourite clicked' id='${meals.idMeal}'><i class="fa-sharp fa-solid fa-heart"></i></a>`;
+              <div class="button-inside" >
+              <button type="button" class='border-circle more-details' id='${meals.idMeal}'>View Details</button>
+              <a href="" class='favourite clicked' id='${meals.idMeal}'><i class="fa-sharp fa-solid fa-heart"></i></a>
+              </div>`;
 
       mealList.append(div);
 
-      var favoriteButton = document.querySelectorAll("a");
-      for (let button of favoriteButton) {
-        button.addEventListener("click", toggleFavorites);
-      }
-
-      var moreDetailsbutton = document.querySelectorAll(".more-details");
-      for (let button of moreDetailsbutton) {
-        button.addEventListener("click", moreDetails);
-      }
+      addEventListeners();
     }
   }
+
   // Updated event listener for my-favorite-meals button
   favoritesList.addEventListener("click", function () {
     if (favoritesList.textContent === "Favorite Meals") {
@@ -150,6 +149,17 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Event listeners
-  searchInput.addEventListener("input", displaySearchResults);
-  favoritesList.addEventListener("click", displayFavoriteMeals);
+  searchInput.addEventListener("input", function () {
+    displaySearchResults(this.value);
+  });
+
+  function getFavoriteArray() {
+    return localStorage.getItem("favoriteArray")
+      ? JSON.parse(localStorage.getItem("favoriteArray"))
+      : [];
+  }
+
+  function updateLocalStorage() {
+    localStorage.setItem("favoriteArray", JSON.stringify(favoriteArray));
+  }
 });
