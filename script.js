@@ -5,6 +5,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let favoriteArray = getFavoriteArray();
 
+  // Add event listener to the h1 element
+  const homeLink = document.getElementById("home-link");
+  if (homeLink) {
+    homeLink.addEventListener("click", function () {
+      // Redirect to the homepage or perform any desired action
+      displaySearchResults("");
+    });
+  } else {
+    console.error("Element with id 'home-link' not found.");
+  }
+
   async function moreDetails() {
     const id = this.id;
     const response = await fetch(

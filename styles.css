@@ -3,15 +3,14 @@ body {
   margin: 0;
   background: linear-gradient(to right, #fa9e87, #e9a169);
   overflow: hidden;
-  font-family: 'Verdana', 'Geneva', 'Tahoma', sans-serif;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 500;
 }
 
 /* Main Content Styles */
 main {
   width: 100%;
   height: 100vh;
-  background-size: cover;
-  background-image: url('https://unsplash.com/photos/a-plane-flying-in-the-sky-at-sunset-TIvFLeqZ4ec');
   overflow-y: scroll;
   padding: 1%;
   box-sizing: border-box;
@@ -25,6 +24,7 @@ h1 {
   color: #b72322;
   text-decoration: underline;
   margin-bottom: 0.7%;
+  cursor: pointer;
 }
 
 /* Search Section Styles */
@@ -48,10 +48,10 @@ h1 {
 
 /* Button Styles */
 button {
-  background-color: #dfdfdf;
-  color: #b80f0f;
+  background-image: radial-gradient(circle, #41e90a, #65ea02, #7fea01, #95eb07, #a8eb12);
+  color: #0a0909;
   margin-top: 1%;
-  border: 1px solid rgb(210, 105, 105);
+  border: 2px solid rgb(231, 226, 226);
   border-radius: 5%;
   width: auto;
   cursor: pointer;
@@ -71,7 +71,6 @@ button {
 .images {
   height: 45vh;
   margin: 0 1% 2% 1%;
-  border: 2px solid #faf6f6;
   border-radius: 5px;
   overflow: hidden;
   position: relative;
@@ -155,7 +154,7 @@ button {
 }
 
 .images:hover {
-  box-shadow: 2px 2px 2px #dfdfdf, -2px -2px 2px #dfdfdf;
+  box-shadow: 3px 3px 3px #f7f7f7, -3px -3px 3px #dfdbdb;
 }
 
 /* Meal Details Page Styles */
