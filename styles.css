@@ -48,7 +48,7 @@ h1 {
 
 /* Button Styles */
 button {
-  background-image: radial-gradient(circle, #b72322, #960b0b);
+  background-color:  #960b0b;
   color: #fefefe;
   margin-top: 1%;
   border: 2px solid rgb(231, 226, 226);
@@ -131,9 +131,9 @@ button {
 }
 
 .images button {
-  background-color: #debe0d;
+  background-color: #debe0d !important;
   height: auto;
-  color: #ffffff;
+  color: #080808;
   margin-left: 2%;
 }
 
