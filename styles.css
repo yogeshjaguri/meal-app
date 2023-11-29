@@ -48,8 +48,8 @@ h1 {
 
 /* Button Styles */
 button {
-  background-image: radial-gradient(circle, #41e90a, #65ea02, #7fea01, #95eb07, #a8eb12);
-  color: #0a0909;
+  background-image: radial-gradient(circle, #b72322, #960b0b);
+  color: #fefefe;
   margin-top: 1%;
   border: 2px solid rgb(231, 226, 226);
   border-radius: 5%;
@@ -106,7 +106,7 @@ button {
 }
 
 .images > .more-details:hover {
-  border: 1px solid rgb(57, 57, 54);
+  border: 1px solid rgb(255, 255, 255);
 }
 
 .images h4 {
@@ -133,7 +133,7 @@ button {
 .images button {
   background-color: #debe0d;
   height: auto;
-  color: #1a1917;
+  color: #ffffff;
   margin-left: 2%;
 }
 
