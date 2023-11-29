@@ -56,6 +56,10 @@ button {
   width: auto;
   cursor: pointer;
 }
+button:hover{
+  background-color: #580a0a;
+  border: 1px solid rgb(255, 255, 255);
+}
 
 /* Meals Section Styles */
 #meals-div {

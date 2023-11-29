@@ -26,13 +26,13 @@ document.addEventListener("DOMContentLoaded", function () {
     mealList.innerHTML = "";
 
     const meals = data.meals[0];
-
-    // Add "Back" button outside the div
+    //back button
     const backButton = document.createElement("button");
     backButton.classList.add("back-button");
     backButton.textContent = "Back";
     mealList.append(backButton);
 
+    //create element
     const div = document.createElement("div");
     div.classList.add("details-page");
     div.innerHTML = `
