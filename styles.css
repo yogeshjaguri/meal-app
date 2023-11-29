@@ -1,7 +1,7 @@
 /* Global Styles */
 body {
   margin: 0;
-  background-color: #fdf9f9;
+  background: linear-gradient(to right, #fa9e87, #e9a169);
   overflow: hidden;
   font-family: 'Verdana', 'Geneva', 'Tahoma', sans-serif;
 }
@@ -28,15 +28,16 @@ h1 {
 }
 
 /* Search Section Styles */
-#search-section {
+.search-section {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 #search-input {
   width: 80%;
-  margin-left: 10%;
+  height: 5vh;
   font-size: 17px;
   padding: 2%;
   box-sizing: border-box;
@@ -49,11 +50,10 @@ h1 {
 button {
   background-color: #dfdfdf;
   color: #b80f0f;
-  margin: 1%;
-  margin-left: 40%;
-  height: 40%;
+  margin-top: 1%;
   border: 1px solid rgb(210, 105, 105);
-  border-radius: 10%;
+  border-radius: 5%;
+  width: auto;
   cursor: pointer;
 }
 
@@ -64,13 +64,15 @@ button {
   justify-content: center;
   flex-wrap: wrap;
   margin: auto;
+    padding-bottom: 10%;
+
 }
 
 .images {
   height: 45vh;
   margin: 0 1% 2% 1%;
   border: 2px solid #faf6f6;
-  border-radius: 12px;
+  border-radius: 5px;
   overflow: hidden;
   position: relative;
   background-color: #ffffff;
@@ -167,6 +169,7 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-bottom: 10%;
 }
 
 .details-page h3 {
@@ -185,20 +188,22 @@ button {
 }
 
 .details-page img {
-  margin-left: 10%;
+  /* margin-left: 10%; */
   height: 50vh;
 }
 
 .details-page button {
   width: 100%;
-  height: auto;
+  /* height: auto; */
   background-color: #dfdfdf;
   color: blue;
 }
 
 /* Back Button Styles */
 .back-button {
+  cursor: pointer;
   margin-right: 100%;
+  margin-left: 8%;
   background-color: #dfdfdf;
   color: blue;
 }
