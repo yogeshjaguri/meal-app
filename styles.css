@@ -33,6 +33,7 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-shadow: 0px 5px 5px -5px #ffffff;
 }
 
 #search-input {
@@ -50,12 +51,14 @@ h1 {
 button {
   background-color:  #960b0b;
   color: #fefefe;
-  margin-top: 1%;
+  margin-top: .5%;
+  margin-bottom: .5%;
   border: 1px solid rgb(231, 226, 226);
   border-radius: 5%;
   width: auto;
   cursor: pointer;
 }
+
 button:hover{
   background-color: #580a0a;
   border: 1px solid rgb(255, 255, 255);
